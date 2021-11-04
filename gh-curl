@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -e
+
+REGEX="([a-zA-Z0-9\\-]+\\/\\S+)\\.git\$"
+
+if [ -z "$2" ]
+then
+	ORIGIN=$(git remote get-url origin)
+
+	if [[ $ORIGIN =~ $REGEX ]]
+	then
+		REPO="${BASH_REMATCH[1]}"
+	else
+		echo "Could not get repo from origin URL ($ORIGIN)" >&2
+		exit 1
+	fi
+
+	FILENAME="$1"
+else
+	REPO="$1"
+	FILENAME="$2"
+fi
+
+if [ -z "$FILENAME" ]
+then
+	echo "Missing argument: filename" >&2
+	exit 1
+fi
+
+API_REQUEST="repos/$REPO/contents/$FILENAME"
+
+CONTENT=$(gh api "$API_REQUEST" | jq --raw-output ".content" | base64 --decode)
+
+echo "$CONTENT"
