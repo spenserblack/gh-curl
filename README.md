@@ -1,6 +1,6 @@
 # `gh curl`
 
-Curl an individual file from a repository with the GitHub CLI
+Get an individual file's contents from a repository with the GitHub CLI
 
 ## Usage
 
