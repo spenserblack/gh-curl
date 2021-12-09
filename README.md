@@ -2,6 +2,12 @@
 
 Get an individual file's contents from a repository with the GitHub CLI
 
+## Installation
+
+```bash
+gh extension install spenserblack/gh-curl
+```
+
 ## Usage
 
 ```bash
