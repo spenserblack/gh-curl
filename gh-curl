@@ -31,4 +31,4 @@ API_REQUEST="repos/$REPO/contents/$FILENAME"
 
 CONTENT=$(gh api "$API_REQUEST" | jq --raw-output ".content" | base64 --decode)
 
-echo "$CONTENT"
+echo -n "$CONTENT"
